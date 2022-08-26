@@ -1,5 +1,4 @@
-// SPDX-License-Identifier: Apache-2.0
-// Copyright 2021 Kenji Miyake
+// Copyright 2022 Satoshi Tanaka
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,12 +46,13 @@ bool update_param(
 
 namespace autoware_perception_marker_array
 {
-AutowarePerceptionMarkerArrayNode::AutowarePerceptionMarkerArrayNode(const rclcpp::NodeOptions & node_options)
+AutowarePerceptionMarkerArrayNode::AutowarePerceptionMarkerArrayNode(
+  const rclcpp::NodeOptions & node_options)
 : Node("autoware_perception_marker_array", node_options)
 {
   // Parameter Server
-  set_param_res_ =
-    this->add_on_set_parameters_callback(std::bind(&AutowarePerceptionMarkerArrayNode::onSetParam, this, _1));
+  set_param_res_ = this->add_on_set_parameters_callback(
+    std::bind(&AutowarePerceptionMarkerArrayNode::onSetParam, this, _1));
 
   // Node Parameter
   node_param_.update_rate_hz = declare_parameter<double>("node_params.update_rate_hz", 10.0);
@@ -66,7 +66,8 @@ AutowarePerceptionMarkerArrayNode::AutowarePerceptionMarkerArrayNode(const rclcp
 
   // Subscriber
   sub_data_ = create_subscription<Int32>(
-    "~/input/data", rclcpp::QoS{1}, std::bind(&AutowarePerceptionMarkerArrayNode::onData, this, _1));
+    "~/input/data", rclcpp::QoS{1},
+    std::bind(&AutowarePerceptionMarkerArrayNode::onData, this, _1));
 
   // Publisher
   pub_data_ = create_publisher<Int32>("~/output/data", 1);
@@ -74,7 +75,8 @@ AutowarePerceptionMarkerArrayNode::AutowarePerceptionMarkerArrayNode(const rclcp
   // Timer
   const auto update_period_ns = rclcpp::Rate(node_param_.update_rate_hz).period();
   timer_ = rclcpp::create_timer(
-    this, get_clock(), update_period_ns, std::bind(&AutowarePerceptionMarkerArrayNode::onTimer, this));
+    this, get_clock(), update_period_ns,
+    std::bind(&AutowarePerceptionMarkerArrayNode::onTimer, this));
 }
 
 void AutowarePerceptionMarkerArrayNode::onData(const Int32::ConstSharedPtr msg) { data_ = msg; }

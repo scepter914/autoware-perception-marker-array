@@ -1,5 +1,4 @@
-// SPDX-License-Identifier: Apache-2.0
-// Copyright 2021 Kenji Miyake
+// Copyright 2022 Satoshi Tanaka
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,8 +20,8 @@
 #include <string>
 #include <vector>
 
-#include "example_interfaces/msg/int32.hpp"
 #include "autoware_perception_marker_array/autoware_perception_marker_array.hpp"
+#include "example_interfaces/msg/int32.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 namespace autoware_perception_marker_array

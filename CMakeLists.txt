@@ -18,8 +18,8 @@ ament_auto_find_build_dependencies()
 
 ## Targets
 ament_auto_add_library(autoware_perception_marker_array_node_component SHARED
-  src/autoware_perception_marker_array_node/autoware_perception_marker_array.cpp
-  src/autoware_perception_marker_array_node/autoware_perception_marker_array_node.cpp
+  src/autoware_perception_marker_array.cpp
+  src/autoware_deteciton_marker_array_node/autoware_detection_marker_array_node.cpp
 )
 
 rclcpp_components_register_node(autoware_perception_marker_array_node_component
